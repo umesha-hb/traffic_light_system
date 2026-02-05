@@ -24,7 +24,7 @@ A production-style Spring Boot application designed to control traffic signals a
 * **Spring Boot 3.5*
 * Spring Web
 * Spring Data JPA
-* H2 Database
+* MYSQL Database
 * Maven 3+
 
 ---
@@ -47,17 +47,37 @@ traffic.light.system
 ├── exception # Global exception handling
 
 -------
+
+TrafficSignalScheduler is a scheduled background job that automatically rotates traffic lights
+at fixed intervals. It ensures only one direction group is green at a time, uses transactions for consistency,
+and is configurable via properties.
+
+--------
+
 🔌 API Endpoints
 
-PUT /traffic/signal
+1] PUT /traffic/signal ---this api used updated the Traffic signals for Emergency vechiels
 
-Request
+	Request
 
-{
-"direction": "NORTH",
-"signal": "GREEN"
-}
+	{
+	"direction": "NORTH",
+	"lightSignal": "GREEN"
+	}
+
+	Response
+	200 OK
+--------------
+
+2] GET /traffic/state Provide the current state and timing history via the API
 
 Response
-200 OK
+{
+"greenDirection": "NORTH",
+"since": "2026-02-05T18:12:06.5272327"
+}
+
+---------
+
+
 

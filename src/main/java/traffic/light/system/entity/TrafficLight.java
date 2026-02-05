@@ -6,6 +6,8 @@ import lombok.Setter;
 import traffic.light.system.enums.Direction;
 import traffic.light.system.enums.Signal;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class TrafficLight {
     @Column(name = "light_signal")
     private Signal signal;//SIGNAL is a reserved keyword in MySQL.
 
-    @Version
-    private Long version;
+    private LocalDateTime switchedAt;
+
+    private Long durationSeconds; // how long it stayed active
 }
